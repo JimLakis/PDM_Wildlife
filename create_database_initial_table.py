@@ -6,24 +6,12 @@ Date: Jul 20, 2023
 
 '''
 
-from typing import Optional
+from sqlmodel import SQLModel, create_engine
 
-from sqlmodel import Field, SQLModel, create_engine
-
-from datetime import datetime
+from models import models
 
 
-class Animals(SQLModel, table = True):
-    id: Optional[int] = Field(default = None, primary_key = True)
-    date_observed: datetime
-    date_posted: datetime
-    witness_first_name: str
-    witness_second_name: str
-    animal_general_name: str
-    aninal_genus_name: Optional[str] = None
-    aninal_species_name: Optional[str] = None
-    number_observed: Optional[int] = 1
-
+models.Animals()
 
 sqlite_file_name = "animals_db.db"
 sqlite_url = f"sqlite:///{sqlite_file_name}"
