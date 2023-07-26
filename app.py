@@ -20,17 +20,17 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-##### Routes #####
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World!"}
-
-
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
+    
+
+##### Routes #####
+    
+    
+@app.get("/")
+async def root():
+    return {"message": "Hello World!"}
 
 
 @app.post("/animals/")
