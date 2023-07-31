@@ -24,9 +24,10 @@ class Animals(SQLModel, table = True):
     aninal_species_name: Optional[str] = None
     number_observed: Optional[int] = 1
     
-    images_id: Optional[int] = Field(default=None, foreign_key="images.id")
+    #images_id: Optional[int] = Field(default=None, foreign_key="images.id")
     
-    
+'''
 class Images (SQLModel, table = True):
     id: Optional[int] = Field(default = None, primary_key = True)
     image_type: str
+'''

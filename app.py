@@ -10,11 +10,12 @@ https://sqlmodel.tiangolo.com/tutorial/code-structure/
 '''
 
 from sqlmodel import Session, select
-from database import create_db_and_tables, engine
-from models import Animals
-
-
 from fastapi import FastAPI
+
+# app modules
+from database import create_db_and_tables
+from models import Animals
+from engine import engine
 
 
 app = FastAPI()
@@ -48,6 +49,8 @@ def read_animals():
         animals = session.exec(select(Animals)).all()
         return animals
     
+
+
 
 def main():
     create_db_and_tables()
