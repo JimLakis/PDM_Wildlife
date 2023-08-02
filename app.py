@@ -34,7 +34,7 @@ async def root():
     return {"message": "Hello World!"}
 
 
-@app.post("/animals/")
+@app.post("/animals/") # <-- add response_model
 def create_animal(animal: Animals):
     with Session(engine) as session:
         session.add(animal)
@@ -43,7 +43,7 @@ def create_animal(animal: Animals):
         return animal
 
 
-@app.get("/animals/")
+@app.get("/animals/") # <-- add response_model
 def read_animals():
     with Session(engine) as session:
         animals = session.exec(select(Animals)).all()
