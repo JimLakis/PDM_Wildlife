@@ -9,6 +9,15 @@ https://sqlmodel.tiangolo.com/tutorial/code-structure/
 
 '''
 
+'''
+
+from typing import List, Optional # <-- List to validate GET output as a list
+
+from fastapi import FastAPI
+from sqlmodel import Field, Session, SQLModel, create_engine, select
+
+'''
+
 from sqlmodel import Session, select
 from fastapi import FastAPI
 
