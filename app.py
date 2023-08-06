@@ -18,6 +18,8 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 
 '''
 
+from typing import List
+
 from sqlmodel import Session, select
 from fastapi import FastAPI
 
@@ -43,7 +45,7 @@ async def root():
     return {"message": "Hello World!"}
 
 
-@app.post("/animals/") # <-- add response_model
+@app.post("/animals/", response_model = Animals) # <-- add response_model
 def create_animal(animal: Animals):
     with Session(engine) as session:
         session.add(animal)
@@ -52,7 +54,7 @@ def create_animal(animal: Animals):
         return animal
 
 
-@app.get("/animals/") # <-- add response_model
+@app.get("/animals/", response_model = List[Animals]) # <-- add response_model
 def read_animals():
     with Session(engine) as session:
         animals = session.exec(select(Animals)).all()
