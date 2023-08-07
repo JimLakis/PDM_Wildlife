@@ -20,8 +20,8 @@ class Animals(SQLModel, table = True):
     witness_first_name: str
     witness_second_name: str
     animal_general_name: str
-    aninal_genus_name: Optional[str] = None
-    aninal_species_name: Optional[str] = None
+    animal_genus_name: Optional[str] = None
+    animal_species_name: Optional[str] = None
     number_observed: Optional[int] = 1
     
     #images_id: Optional[int] = Field(default=None, foreign_key="images.id")
