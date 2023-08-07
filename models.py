@@ -35,7 +35,7 @@ class HeroRead(HeroBase):
 '''
 
 
-class AnimalsBase(SQLModel):
+class AnimalBase(SQLModel):
     date_observed: datetime
     date_posted: datetime
     witness_first_name: str
@@ -45,13 +45,13 @@ class AnimalsBase(SQLModel):
     animal_species_name: Optional[str] = None
     number_observed: Optional[int] = 1
     
-class Animals(AnimalsBase, table = True):
+class Animals(AnimalBase, table = True):
     id: Optional[int] = Field(default = None, primary_key = True)
     
-class AnimalsCreate(AnimalsBase):
+class AnimalCreate(AnimalBase):
     pass
 
-class AnimalsRead(AnimalsBase):
+class AnimalsRead(AnimalBase):
     id: int
 
 
