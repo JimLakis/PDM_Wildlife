@@ -2,22 +2,14 @@
 
 Author: James Lakis
 
-Date: Jul 23, 2023
+Date (started): Jul 23, 2023
 
 Inspired by: SqlModel - Code Structure and Multiple Files
 https://sqlmodel.tiangolo.com/tutorial/code-structure/
 
-'''
 
 '''
-# Imports taken from FastAPI Tutorials
 
-from typing import List, Optional # <-- List to validate GET output as a list
-
-from fastapi import FastAPI
-from sqlmodel import Field, Session, SQLModel, create_engine, select
-
-'''
 
 from typing import List
 
@@ -40,28 +32,6 @@ def on_startup():
 
 ##### Routes #####
     
-
-'''
-
-
-@app.post("/heroes/", response_model=HeroRead) # Recall argument Pydantic's reponse_model is used for data validation purposes. Here the HeroRead class (including the id primary key) is referenced.
-def create_hero(hero: HeroCreate): # Similar class to HeroRead used for type-hinting less id is utilized. The underlying table's id column does not need to be included here since the database populates this field.
-    with Session(engine) as session:
-        hero = Hero.from_orm(hero) # Here a new Hero model is created in memory w/o the need to provide the id
-        session.add(hero)
-        session.commit()
-        session.refresh(hero)
-        return hero
-
-
-@app.get("/heroes/", response_model=List[HeroRead]) # response_model defines (validates) the reponse as a list containing columns defined by HeroRead class, note: Hero.id is included.
-def read_heroes():
-    with Session(engine) as session:
-        heroes = session.exec(select(Hero)).all()
-        return heroes
-
-'''
-
 
 @app.get("/")
 async def root():
