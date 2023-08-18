@@ -18,7 +18,7 @@ from fastapi import FastAPI
 
 # app modules
 from database import create_db_and_tables
-from models import Animals, AnimalCreate, AnimalsRead #, AnimalsBase 
+from models import Animal, AnimalCreate, AnimalRead, Image, ImageCreate, ImageRead
 from engine import engine
 
 
@@ -38,41 +38,38 @@ async def root():
     return {"message": "Hello World!"}
 
 
-@app.post("/animals/", response_model = AnimalsRead)
-def create_animal(animals : AnimalCreate):
+@app.post("/animals/", response_model = AnimalRead)
+def create_animal(animal : AnimalCreate):
     with Session(engine) as session:
-        animals = Animals.from_orm(animals)
-        session.add(animals)
-        session.commit()
-        session.refresh(animals)
-        return animals
-
-
-@app.get("/animals", response_model = List[AnimalsRead])
-def read_animals():
-    with Session(engine) as session:
-        animals = session.exec(select(Animals)).all()
-    return animals
-
-
-''' # Original "working" route/path operations...
-
-@app.post("/animals/", response_model = Animals) # <-- add response_model
-def create_animal(animal: Animals):
-    with Session(engine) as session:
+        animal = Animal.from_orm(animal)
         session.add(animal)
         session.commit()
         session.refresh(animal)
         return animal
 
 
-@app.get("/animals/", response_model = List[Animals]) # <-- add response_model
+@app.get("/animals", response_model = List[AnimalRead])
 def read_animals():
     with Session(engine) as session:
-        animals = session.exec(select(Animals)).all()
-        return animals
-        
-'''
+        animals = session.exec(select(Animal)).all()
+    return animals
+
+
+@app.post("/images/", response_model = ImageRead)
+def create_image(image : ImageCreate):
+    with Session(engine) as session:
+        image = Image.from_orm(image)
+        session.add(image)
+        session.commit()
+        session.refresh(image)
+        return image
+
+
+@app.get("/images", response_model = List[ImageRead])
+def read_images():
+    with Session(engine) as session:
+        image = session.exec(select(Image)).all()
+    return image
 
 
 def main():
