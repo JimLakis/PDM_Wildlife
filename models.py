@@ -23,14 +23,14 @@ class AnimalBase(SQLModel):
     animal_species_name: Optional[str] = None
     number_observed: Optional[int] = 1
     
-class Animals(AnimalBase, table = True):
+class Animal(AnimalBase, table = True):
     id: Optional[int] = Field(default = None, primary_key = True)
     #images_id: Optional[int] = Field(default=None, foreign_key="images.id")
     
 class AnimalCreate(AnimalBase):
     pass
 
-class AnimalsRead(AnimalBase):
+class AnimalRead(AnimalBase):
     id: int
 
 

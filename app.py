@@ -18,7 +18,7 @@ from fastapi import FastAPI
 
 # app modules
 from database import create_db_and_tables
-from models import Animals, AnimalCreate, AnimalsRead #, AnimalsBase 
+from models import Animal, AnimalCreate, AnimalRead #, AnimalsBase 
 from engine import engine
 
 
@@ -38,20 +38,20 @@ async def root():
     return {"message": "Hello World!"}
 
 
-@app.post("/animals/", response_model = AnimalsRead)
-def create_animal(animals : AnimalCreate):
+@app.post("/animals/", response_model = AnimalRead)
+def create_animal(animal : AnimalCreate):
     with Session(engine) as session:
-        animals = Animals.from_orm(animals)
-        session.add(animals)
+        animal = Animal.from_orm(animal)
+        session.add(animal)
         session.commit()
-        session.refresh(animals)
-        return animals
+        session.refresh(animal)
+        return animal
 
 
-@app.get("/animals", response_model = List[AnimalsRead])
+@app.get("/animals", response_model = List[AnimalRead])
 def read_animals():
     with Session(engine) as session:
-        animals = session.exec(select(Animals)).all()
+        animals = session.exec(select(Animal)).all()
     return animals
 
 
