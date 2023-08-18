@@ -18,7 +18,7 @@ from fastapi import FastAPI
 
 # app modules
 from database import create_db_and_tables
-from models import Animal, AnimalCreate, AnimalRead #, AnimalsBase 
+from models import Animal, AnimalCreate, AnimalRead, Image, ImageCreate, ImageRead
 from engine import engine
 
 
@@ -55,24 +55,21 @@ def read_animals():
     return animals
 
 
-''' # Original "working" route/path operations...
-
-@app.post("/animals/", response_model = Animals) # <-- add response_model
-def create_animal(animal: Animals):
+@app.post("/images/", response_model = ImageRead)
+def create_image(image : ImageCreate):
     with Session(engine) as session:
-        session.add(animal)
+        image = Image.from_orm(image)
+        session.add(image)
         session.commit()
-        session.refresh(animal)
-        return animal
+        session.refresh(image)
+        return image
 
 
-@app.get("/animals/", response_model = List[Animals]) # <-- add response_model
-def read_animals():
+@app.get("/images", response_model = List[ImageRead])
+def read_images():
     with Session(engine) as session:
-        animals = session.exec(select(Animals)).all()
-        return animals
-        
-'''
+        image = session.exec(select(Image)).all()
+    return image
 
 
 def main():

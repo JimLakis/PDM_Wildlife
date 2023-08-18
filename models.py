@@ -44,11 +44,11 @@ class Images (SQLModel, table = True):
 class ImageBase(SQLModel):
     image_type: str
 
-class Images(ImageBase, table = True):
+class Image(ImageBase, table = True):
     id: Optional[int] = Field(default = None, primary_key = True)
 
 class ImageCreate(ImageBase):
     pass
 
-class ImagesRead(AnimalBase):
+class ImageRead(ImageBase):
     id: int
