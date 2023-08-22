@@ -25,7 +25,7 @@ class AnimalBase(SQLModel):
     
 class Animal(AnimalBase, table = True):
     id: Optional[int] = Field(default = None, primary_key = True)
-    #images_id: Optional[int] = Field(default=None, foreign_key="images.id")
+    image_id: Optional[int] = Field(default=None, foreign_key="image.id")
     
 class AnimalCreate(AnimalBase):
     pass
