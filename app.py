@@ -45,7 +45,7 @@ def create_animal(animal : AnimalCreate):
         session.add(animal)
         session.commit()
         session.refresh(animal)
-        return animal
+    return animal
 
 
 @app.get("/animals", response_model = List[AnimalRead])
@@ -62,7 +62,7 @@ def create_image(image : ImageCreate):
         session.add(image)
         session.commit()
         session.refresh(image)
-        return image
+    return image
 
 
 @app.get("/images", response_model = List[ImageRead])
