@@ -4,6 +4,11 @@ Author: James Lakis
 
 Date (started): Jul 20, 2023
 
+Notes:
+
+    1. The order in the classes below is important. The dependent Image data model class needs to be defined at the top of the file before the independent Animal data model class.
+    2. In the type definitions of the relationship attributes, example - animals: List["Animal"], it's important that the class name "Animal" be a string and not passed as the class defintion Animal w/o quotes. This is a form of Forward Reference.
+
 '''
 
 from typing import Optional, List
@@ -12,13 +17,6 @@ from sqlmodel import Field, SQLModel, Relationship
 
 from datetime import datetime
 
-
-'''
-class Image (SQLModel, table = True):
-    id: Optional[int] = Field(default = None, primary_key = True)
-    image_type: str
-    animals: List["Animal"] = Relationship(back_populates="image")
-'''
 
 class ImageBase(SQLModel):
     image_type: str
@@ -54,23 +52,3 @@ class AnimalCreate(AnimalBase):
 
 class AnimalRead(AnimalBase):
     id: int
-
-
-
-
-
-'''
-class ImageBase(SQLModel):
-    image_type: str
-
-class Image(ImageBase, table = True):
-    id: Optional[int] = Field(default = None, primary_key = True)
-    animal: Optional(Animal) = Relationship(back_populates="image")
-
-class ImageCreate(ImageBase):
-    pass
-
-class ImageRead(ImageBase):
-    id: int
-
-'''
