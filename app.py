@@ -28,10 +28,10 @@ app = FastAPI()
 @app.on_event("startup")
 def on_startup():
     create_db_and_tables()
-    
+
 
 ##### Routes #####
-    
+
 
 @app.get("/")
 async def root():
@@ -50,6 +50,8 @@ def create_animal(animal : AnimalCreate):
 
 @app.get("/animals", response_model = List[AnimalRead])
 def read_animals():
+    # TODO: can you access the images for each animal?
+    # TODO: have an endpoint to list a single animal
     with Session(engine) as session:
         animals = session.exec(select(Animal)).all()
     return animals
@@ -57,6 +59,7 @@ def read_animals():
 
 @app.post("/images/", response_model = ImageRead)
 def create_image(image : ImageCreate):
+    # TODO: image needs to be linked to an animal
     with Session(engine) as session:
         image = Image.from_orm(image)
         session.add(image)
