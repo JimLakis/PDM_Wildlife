@@ -6,7 +6,7 @@ Date (started): Jul 20, 2023
 
 Notes:
 
-    1. The order in the classes below is important. The dependent Image data model class needs to be defined at the top of the file before the independent Animal data model class.
+    1. The order in the classes below is important. The parent data model class, Image, needs to be defined at the top of the file before the child data model class Animal.
     2. In the type definitions of the relationship attributes, example - animals: List["Animal"], it's important that the class name "Animal" be a string and not passed as the class defintion Animal w/o quotes. This is a form of Forward Reference.
 
 '''
