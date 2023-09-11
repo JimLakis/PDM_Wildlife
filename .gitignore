@@ -2,3 +2,4 @@
 
 Pipfile.*
 venv
+/.pytest_cache/
