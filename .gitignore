@@ -1,5 +1,9 @@
 # ignore Pipfiles
 
 Pipfile.*
-venv
-/.pytest_cache/
+Pipfile.lock
+Pipfile
+
+# ignore requirements.txt
+
+requirements.txt
